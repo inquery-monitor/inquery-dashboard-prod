@@ -203,6 +203,7 @@ function OverviewErrors() {
  * @param props 
  */
 function Overview(props: OverviewProps) {
+  console.log(props.overviewData);
   return (
     <div id="modeOverview">
       <OverviewSummary summary={props.overviewData.summary} averageTime={props.resolversData.averageTime}/>

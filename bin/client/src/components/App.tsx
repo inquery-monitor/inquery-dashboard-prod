@@ -11,9 +11,31 @@ import Resolvers from './Resolvers';
 
 // Style.
 import "./App.css";
-
+const processedData = {
+      'overview': {
+        'summary': {
+          'numTotalRequests': 0
+        },
+        'requests': {
+          'times':[],
+          'rpm': []
+        },
+        'response': {
+          'times': [],
+          '90': []
+        },
+        'resolvers': {
+          'times': [],
+          'aveSpeed': []
+        }
+      },
+      'resolvers': {
+        'invocationCounts': {},
+        'executionTimes': {},
+        'averageTime' : 0.0
+      }
+    }
 // TODO: Make this responsive to changes.
-import { processedData, getOverviewData, getResolversData } from './Data';
 
 // Renders App.
 const App = () => {
@@ -22,27 +44,15 @@ const App = () => {
   
   // This establishes socket connection.  Invokes once.
   useEffect(() => {
-    // Connection.
-    const connection = new WebSocket('ws://localhost:9000');
-    
-    // On open connection, update data.
-    connection.onopen = () => {
-      console.log("socket is open on port 9000")
-      fetch('./db/data.json')
-        .then(data => data.json())
-        .then(res => updateData({ overview: getOverviewData(res), resolvers: getResolversData(res) }))
-        .catch(e => console.log('error fetching from json', e))
-      
-      // On message listener.  Updates data according to message body.
-      connection.onmessage = (message) => {
-        console.log('socket server message: ' + (message.data));
-    
-        fetch('./db/data.json')
-          .then(data => data.json())
-          .then(res => updateData({ overview: getOverviewData(res), resolvers: getResolversData(res) }))
-          .catch(e => console.log('error fetching from json', e))
-      }
-    }
+    fetch('/data/getItem')
+    .then((res)=>res.json())
+    .then((resolverData)=> {
+      console.log(typeof resolverData);
+      console.log(JSON.parse(resolverData.Payload));
+      updateData(JSON.parse(resolverData.Payload));
+      // updateData(resolverData.Payload);
+    })
+    .catch((e)=>console.log(e));
   }, [])
 
   // Hook to update the current mode.
