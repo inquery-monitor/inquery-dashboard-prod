@@ -22,12 +22,21 @@ function Header({ modes, updateMode }: HeaderProps) {
     )
   });
 
+  const logOut = () => {
+    console.log('logging out')
+    fetch('/logout')
+    .then((res)=> document.location.replace('/'))
+    .catch((e)=>{
+      console.log('unable to logout', e)
+    })
+  }
   // Header FC renders the following DOM:
   return (
     <div className="header">
       <div className="header-logo">inQuery</div>
       <div className="header-navigation">{modeNavigationItems}</div>
       <div className="header-moreinformation">
+      <button id = 'log-out' onClick={logOut}>Logout</button>
       {/*<Refresh className="svg_icons"/>
         <SettingsApplications className="svg_icons"/>
         <HelpOutline className="svg_icons"/>*/}
