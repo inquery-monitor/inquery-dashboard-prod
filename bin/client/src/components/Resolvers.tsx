@@ -58,14 +58,22 @@ function ResolversInvocationCount(props: any) {
  * @param props 
  */
 function ResolversExecutionTime(props: any) {
+  console.log(props)
+  console.log('line 61')
+  console.log(props.executionTimes)
+  console.log('line 62')
   // Sort the object of objects by count popularity descending.
   const resolverListSortedByExecutionTime = 
     Object.keys(props.executionTimes).map(path => {
-      return [path, props.executionTimes[path]['ave']];
+      return [path, props.executionTimes[path]];
     }).sort((a, b) => b[1] - a[1]);
 
+  console.log(resolverListSortedByExecutionTime);
   // Create array of DOM elements for the resolvers.
   const resolverListItems = resolverListSortedByExecutionTime.map((item, idx) => {
+    console.log(item)
+    console.log(item[0] + 'line 71');
+    console.log(item[1] + 'line 72');
     return (
       <div key={item[0] + idx} className="resolverListItem">
         <div className="resolverListName">{item[0]}</div>

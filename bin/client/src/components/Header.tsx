@@ -25,12 +25,12 @@ function Header({ modes, updateMode }: HeaderProps) {
   // Header FC renders the following DOM:
   return (
     <div className="header">
-      <div className="header-logo">Goblin&nbsp;Monitor</div>
+      <div className="header-logo">inQuery</div>
       <div className="header-navigation">{modeNavigationItems}</div>
       <div className="header-moreinformation">
-        <Refresh className="svg_icons"/>
+      {/*<Refresh className="svg_icons"/>
         <SettingsApplications className="svg_icons"/>
-        <HelpOutline className="svg_icons"/>
+        <HelpOutline className="svg_icons"/>*/}
       </div>
     </div>
   );
