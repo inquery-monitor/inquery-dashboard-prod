@@ -1,2 +1,2 @@
-# goblinsharks
+# inQuery
 Dashboard for production env--
